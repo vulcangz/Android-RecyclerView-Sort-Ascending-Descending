@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -56,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
         list = new ArrayList<>();
 
         Nature = "1";
-        Link = "http://192.168.1.12/StoreAPI/api/Industry/GetIndustry";
+//        Link = "http://192.168.1.12/StoreAPI/api/Industry/GetIndustry";
+        Link = "http://192.168.100.16/v1/industry";
 
         recyclerView = (RecyclerView) findViewById(R.id.list_recycler);
         imgSortFilter = (ImageView) findViewById(R.id.img_ascorder);
@@ -145,7 +147,8 @@ public class MainActivity extends AppCompatActivity {
         String result = "";
         try {
             HttpClient httpClient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(string);
+//            HttpPost httpPost = new HttpPost(string);
+            HttpGet httpPost = new HttpGet(string);
             String json = "";
             JSONObject jsonObject = new JSONObject();
 /*
@@ -159,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
 
             json = jsonObject.toString();
             StringEntity se = new StringEntity(json);
-            httpPost.setEntity(se);
+//            httpPost.setEntity(se);
             httpPost.setHeader("Accept", "application/json");
             httpPost.setHeader("Content-type", "application/json");
 
@@ -232,11 +235,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+        protected void onPostExecute(String input) {
+            super.onPostExecute(input);
             Common.dismissProgressDialog();
 
-            if (s != null) {
+            if (input != null) {
+                JSONObject s1 = null;
+                try {
+                    s1 = new JSONObject(input);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String s = null;
+                try {
+                    s = s1.getString("industries");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 if (s.equals("[]")) {
                     Common.showToast(context, "Category No Available.");
                 } else {
