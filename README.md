@@ -1,3 +1,11 @@
+# Android app frontend
+
+For A demo of the android app front-end + go aah back-end described in this [article](https://www.worldlink.com.cn/post/write-a-rest-api-service-for-android-app-with-go-micro-framework-aah.html).
+
+[REST API backend written in Go aah framework for this app](https://github.com/vulcangz/aah-recycleview-backend).
+
+The app is based on [dvinfosys/Android-RecyclerView-Sort-Ascending-Descending](https://github.com/dvinfosys/Android-RecyclerView-Sort-Ascending-Descending). 
+
 # Android RecyclerView - Sort Ascending/Descending
 
 RecyclerView is one of those perspectives that you wouldn't accept haven't been in android for quite a while. It's so famous and intensely utilized since it's presentation in API level 22. 
